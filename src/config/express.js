@@ -17,12 +17,12 @@ const createError = require('@cc/utils/error');
 const app = express();
 
  // the client’s IP address is understood as the left-most entry in the X-Forwarded-* header.
-// app.set('trust proxy', true);
+app.set('trust proxy', true);
 
 // 设置跨域
-// app.use(cors);
+app.use(cors());
 // 压缩中间件
-// app.use(compression);
+app.use(compression());
 // 处理 post 参数
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -31,7 +31,7 @@ app.use(bodyParser.text({ type: 'text/*' }));
 app.use(limiter.api);
 
 // 设置日志打印 setup the logger for requests
-app.use(morgan('dev', { stream: logger.stream }));
+app.use(morgan('combined', { stream: logger.stream }));
 
 // 配置文档
 const swaggerSpec = yaml.safeLoad(fs.readFileSync(path.resolve(__dirname, '../docs/swagger.yaml')));
@@ -41,6 +41,7 @@ app.use('/api/docs_test', swaggerUi.serve, swaggerUi.setup(swaggerSpecTest));
 
 // 测试接口
 app.use('/test', (req, res) => {
+  console.log(req.ips);
   res.send({ 'code': 200, 'message': 'test请求成功' })
 })
 

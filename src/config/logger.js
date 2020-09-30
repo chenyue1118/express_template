@@ -9,6 +9,7 @@ const logTransports = {
     coloriza: false,
     timestamp: () => new Date().toISOString(),
     formatter: (options) => {
+      console.log(options);
       const timestamp = options.timestamp();
       const level = winston.config.coloriza(
         option.level,
@@ -19,9 +20,9 @@ const logTransports = {
         options.meta && Object.keys(options.meta).length
           ? '?\nmeta = ' + JSON.stringify(options.meta, null, 2)
           : '';
-        console.log(meta);
+        // console.log(meta);
       // return util.format(timestamp, '[' + level + '-]', message, meta);
-      return util.format(timestamp, message, meta);
+      // return util.format(timestamp);
     }
   }),
   file: new winston.transports.File({
@@ -35,6 +36,7 @@ const logTransports = {
 // create logger
 const logger = winston.createLogger({
   level: config.logLevel,
+  // transports: [new winston.transports.Console(), logTransports.file],
   transports: [logTransports.console, logTransports.file],
   exitOnError: false
 });
