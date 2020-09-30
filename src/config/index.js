@@ -6,7 +6,8 @@
 const config = {
   env: process.env.NODE_ENV,
   serverPort: process.env.SERVER_PORT || 6001,
-  logLevel: 'info'
+  logLevel: 'info',
+  jwtSecret: 'cc is api key'
 };
 
 module.exports = config;

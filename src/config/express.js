@@ -12,6 +12,7 @@ const swaggerUi = require('swagger-ui-express');
 const limiter = require('@cc/config/rate-limit');
 const logger = require('@cc/config/logger');
 const createError = require('@cc/utils/error');
+const routes = require('@cc/routes/index');
 
 
 const app = express();
@@ -32,6 +33,9 @@ app.use(limiter.api);
 
 // 设置日志打印 setup the logger for requests
 app.use(morgan('combined', { stream: logger.stream }));
+
+// mount all v1 APIs to /api/v1
+app.use('/api/v1', routes);
 
 // 配置文档
 const swaggerSpec = yaml.safeLoad(fs.readFileSync(path.resolve(__dirname, '../docs/swagger.yaml')));
