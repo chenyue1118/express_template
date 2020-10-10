@@ -26,6 +26,15 @@ const create = async (username, application = false, expiration = tokenExpireTim
   return token
 }
 
+const verify = (token) => {
+  const payload = jwt.verify(token, secret);
+  const { username, iat } = payload;
+  if (iat && iat < Math.round(new Date() / 1000)) throw new Error('Token 已经过期');
+  if (!username) throw new Error('Token is invalid');
+  return payload;
+}
+
 module.exports = {
-  create
+  create,
+  verify
 }

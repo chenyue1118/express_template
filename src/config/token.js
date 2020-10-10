@@ -28,7 +28,8 @@ const tokenPostInputSchema = Joi.object({
                  .integer()
                  .min(60)
                  .max(2 * 7 * 24 * 60 * 60)
-                 .default(7 * 24 * 60 * 60)
+                 .default(60)
+                 // .default(7 * 24 * 60 * 60)
 });
 
   const tokenExpireTime = process.env.JWT_TOKEN_EXPIRE_TIME
