@@ -1,6 +1,7 @@
 const express = require('express');
 const parameter = require('@cc/middlewares/parameter');
 const tokenConfig = require('@cc/config/token');
+const tokenController = require('@cc/controllers/token');
 
 const router = new express.Router()
 
@@ -9,7 +10,10 @@ const router = new express.Router()
  */
 router
   .route('/login')
-  .post(parameter.validate(tokenConfig.tokenPostInputSchema))
+  .post(
+    parameter.validate(tokenConfig.tokenPostInputSchema),
+    tokenController.get
+  )
 
 
 module.exports = router;

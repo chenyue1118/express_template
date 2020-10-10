@@ -3,7 +3,7 @@ const uuid = require('uuid');
 const { secret, tokenExpireTime } = require('@cc/config');
 
 
-const sign = async (username, application, expiration) => {
+const sign = (username, application, expiration) => {
   return new Promise((resolve, reject) => {
     jwt.sign(
       {
@@ -20,7 +20,7 @@ const sign = async (username, application, expiration) => {
 };
 
 
-const create = (username, application = false, expiration = tokenExpireTime) => {
+const create = async (username, application = false, expiration = tokenExpireTime) => {
 
   const token = await sign(username, application, expiration);
   return token
