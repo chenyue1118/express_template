@@ -11,7 +11,7 @@ const logTransports = {
     formatter: (options) => {
       const timestamp = options.timestamp();
       const level = winston.config.coloriza(
-        option.level,
+        options.level,
         options.level.toUpperCase()
       );
       const message = options.message || ''
@@ -19,8 +19,7 @@ const logTransports = {
         options.meta && Object.keys(options.meta).length
           ? '?\nmeta = ' + JSON.stringify(options.meta, null, 2)
           : '';
-        // console.log(meta);
-      // return util.format(timestamp, '[' + level + '-]', message, meta);
+      return util.format(timestamp, '[' + level + '-]', message, meta);
       // return util.format(timestamp);
     }
   }),
@@ -41,7 +40,8 @@ const logger = winston.createLogger({
 });
 
 logger.stream = {
-  write: (message, encoding) => {
+  // encoding
+  write: (message) => {
     logger.info(message.trim());
   },
 };

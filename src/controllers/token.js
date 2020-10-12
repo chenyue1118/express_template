@@ -6,7 +6,7 @@ const tokenModel = require('@cc/models/token');
  */
  const get = async (req, res, next) => {
    const username = req.body.username
-   const password = req.body.password
+   // const password = req.body.password
    try {
      // TODO: 用户名和密码验证
      const token = await tokenModel.create(username);
