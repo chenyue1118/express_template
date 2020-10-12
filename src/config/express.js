@@ -20,6 +20,8 @@ const app = express();
  // the client’s IP address is understood as the left-most entry in the X-Forwarded-* header.
 app.set('trust proxy', true);
 
+// app.disable('x-powered-by');
+
 // 设置跨域
 app.use(cors());
 // 压缩中间件
