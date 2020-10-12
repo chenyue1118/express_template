@@ -53,6 +53,7 @@ app.use('/test', (req, res) => {
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
+  // res.headersSent boolean 是否响应http请求头
   next(createError('Not Found', 'NoApiError', `API ${req.url} is not found.`));
 })
 
