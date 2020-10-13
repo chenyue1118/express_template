@@ -57,11 +57,6 @@ app.use((req, res, next) => {
   next(createError('Not Found', 'NoApiError', `API ${req.url} is not found.`));
 })
 
-// // test
-// app.listen(6002, () => {
-//   console.log(6002);
-// })
-
 // TODO: error handler
 
 // module exports
