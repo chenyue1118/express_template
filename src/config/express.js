@@ -17,6 +17,8 @@ const routes = require('@cc/routes/index');
 
 const app = express();
 
+// app.use(express.static('public'));
+
  // the client’s IP address is understood as the left-most entry in the X-Forwarded-* header.
 app.set('trust proxy', true);
 
@@ -35,6 +37,8 @@ app.use(limiter.api);
 
 // 设置日志打印 setup the logger for requests
 app.use(morgan('combined', { stream: logger.stream }));
+
+app.use(express.static('public'));
 
 // mount all v1 APIs to /api/v1
 app.use('/api/v1', routes);
