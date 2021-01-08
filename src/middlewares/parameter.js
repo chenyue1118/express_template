@@ -19,7 +19,8 @@ const validate = (schema) => {
     const { error, value } = schema.validate(req.body)
     // 'error', error.details[0].message
     if (error) {
-      logger.debug(error);
+      // logger.debug(error);
+      logger.info(error);
       next(createError('Bad Request', error.message));
     } else {
       req.originalBody = req.body;
