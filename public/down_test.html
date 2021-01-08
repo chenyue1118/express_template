@@ -10,7 +10,7 @@
       window.onload = function() {
         var btn = document.querySelector('.btn')
         btn.onclick = function() {
-          fetch('http://127.0.0.1:6001/api/v1/download', {
+          fetch('/api/v1/download', {
             method: 'POST',
             body: JSON.stringify({ time: new Date().getTime() }),
             headers: new Headers({
