@@ -17,6 +17,21 @@
               'Content-Type': 'application/json',
               'authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjE1NjAwMTIxMTc3IiwiYXBwbGljYXRpb24iOmZhbHNlLCJpYXQiOjE2MTAwOTcxMDcsImV4cCI6MTYxMDcwMTkwN30.iA-_X51qRNGIwAmKr0D0OHIr2g0dhmHPtgB-AM_hGQo'
             })
+          }).then(res => {
+            if (res.ok) {
+              return res.blob();
+            }
+          }).then(blob => {
+            const reader = new FileReader();
+            reader.readAsDataURL(blob);
+            reader.onload = e => {
+              const a = document.createElement('a');
+              a.download = 'fileName.xlsx';
+              a.href = e.target.result;
+              document.body.appendChild(a);
+              a.click();
+              document.body.removeChild(a);
+            };
           })
         }
       }
